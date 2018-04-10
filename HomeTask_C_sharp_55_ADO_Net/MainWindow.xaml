@@ -1,0 +1,44 @@
+﻿<Window x:Class="HomeTask_C_sharp_55_ADO_Net.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeTask_C_sharp_55_ADO_Net"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListBox ItemsSource="{Binding Servers, Source={StaticResource Serv}}" SelectedItem="{Binding CurrentServerName, Source={StaticResource Serv}}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding servername}"></TextBlock>
+                    
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock TextWrapping="Wrap" Grid.Column="1"> Use this selection to connected to Microsoft SQL server 2005 or above, or to Microsoft SQL Azure using the .NET Framework Data Provider for SQL Server</TextBlock>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button FontSize="9" Click="ClickToContinue" Margin="10,5,0,5" Grid.Column="7" Command="{Binding continuaBtn, Source={StaticResource Serv}}">Continue</Button>
+            <Button Margin="5" Grid.Column="8" Click="Button_Click">Cancel</Button>
+        </Grid>
+    </Grid>
+</Window>

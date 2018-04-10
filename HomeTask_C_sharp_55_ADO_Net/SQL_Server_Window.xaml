@@ -1,0 +1,168 @@
+﻿<Window x:Class="HomeTask_C_sharp_55_ADO_Net.SQL_Server_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeTask_C_sharp_55_ADO_Net"
+        mc:Ignorable="d"
+        Title="Add Connection" Height="550" Width="400">
+    <Window.Resources>
+        <Style x:Key="ChoiceAuthentification">
+            <Setter Property="Control.IsEnabled" Value="True"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=winAute, Path=IsChecked}" Value="True">
+                    <Setter  Property="Control.IsEnabled" Value="False"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ChoiceDbField">
+            <Setter Property="Control.IsEnabled" Value="False"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsConnected, Source={StaticResource Serv}}" Value="True">
+                    <Setter  Property="Control.IsEnabled" Value="True"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ChoiceOrEnterDb">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName= SelectOrenterDbNAme, Path=IsChecked}" Value="True">
+                    <Setter  Property="Control.IsEnabled" Value="False"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ChoiceAttachDbFile">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName= AttachDbFile, Path=IsChecked}" Value="True">
+                    <Setter  Property="Control.IsEnabled" Value="False"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="3" >Data Source:</TextBlock>
+        <Border Grid.Row="3" Grid.ColumnSpan="7" BorderBrush="Black" BorderThickness="1">
+            <TextBlock Text="{Binding Source={StaticResource Serv}, Path=CurrentServerName}"></TextBlock>
+        </Border>
+        <Button Click="ButtonChangeEvent" Grid.Row="3" Grid.Column="8" Grid.ColumnSpan="2" >Change</Button>
+        <TextBlock Grid.Row="4" Grid.ColumnSpan="3">Server name:</TextBlock>
+        <TextBox Text="{Binding Servername, Source={StaticResource Serv}}" Grid.Row="5" Grid.ColumnSpan="7"></TextBox>
+
+        <GroupBox Grid.Row="6" Grid.RowSpan="5" Grid.ColumnSpan="10" BorderBrush="Black" Header="Log on to the server">
+            <StackPanel>
+                <RadioButton GroupName="TS" Name="winAute" IsChecked="{Binding Ischecked, Source= {StaticResource Serv}}">Use Window Authentation</RadioButton>
+                <RadioButton GroupName="TS" >Use SQL Server Authentation</RadioButton>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="2" Grid.ColumnSpan="3">User Name:</TextBlock>
+                    <TextBox Text="{Binding UserName, Source={StaticResource Serv}}" Style="{StaticResource ChoiceAuthentification}" Name="login" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="8">
+                    </TextBox>
+                    <TextBlock  Grid.Row="4" Grid.ColumnSpan="3">Password:</TextBlock>
+                    <TextBox Text="{Binding Pas, Source={StaticResource Serv}}" Style="{StaticResource ChoiceAuthentification}" Name="password" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="8"></TextBox>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Style="{StaticResource ChoiceDbField}"  Grid.Row="11" Grid.RowSpan="6" Grid.ColumnSpan="10" BorderBrush="Black" Header="Connect to a Database">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <RadioButton Grid.ColumnSpan="7" IsChecked="{Binding ChoiceOrEnterDb, Source={StaticResource Serv}}" Name="SelectOrenterDbNAme" GroupName="SS">Select or enter database name</RadioButton>
+                <TextBox Grid.Row="1" Grid.ColumnSpan="9" Style="{Binding Source={StaticResource ChoiceAttachDbFile}}"  Name="dbNameTxtBox" TextChanged="TextBox_TextChanged" AutoWordSelection="True" Margin="5,0,0,0" Background="{x:Null}" BorderThickness="1,1,0,1" Grid.Column="1" HorizontalAlignment="Left" Width="305"></TextBox>
+                <Button Click="Button_Click_1" Grid.Row="1" Grid.Column="10" BorderThickness="0,1,1,1" Background="{x:Null}" SnapsToDevicePixels="True">
+                    <Image Source="Arrow_down.png"></Image>
+                </Button>
+                <ListBox Visibility="Hidden" Grid.Row="2" Grid.ColumnSpan="10" SelectionChanged="autoCompleteListBox_SelectionChanged" Name="autoCompleteListBox"></ListBox>
+                <RadioButton Grid.Row="4" Grid.ColumnSpan="6" Name="AttachDbFile" GroupName="SS" >Use SQL Server Authentation</RadioButton>
+                <TextBox Grid.Row="5" Grid.ColumnSpan="7 " Style="{Binding Source={StaticResource ChoiceOrEnterDb}}"  Margin="40,0,0,0"></TextBox>
+
+                <Button Command="{Binding brouwse, Source={StaticResource Serv}}"  Grid.Row="5" Grid.Column="9" Grid.ColumnSpan="2" FontSize="10">Browser...</Button>
+                <TextBlock Grid.Row="6" Grid.ColumnSpan="5">Logical name:</TextBlock>
+                <TextBox Grid.Row="7" Grid.ColumnSpan="10" Style="{Binding Source={StaticResource ChoiceOrEnterDb}}"  Margin="40,0,0,0"></TextBox>
+            </Grid>
+        </GroupBox>
+
+        <Button Command="{Binding testconnectionbtn, Source={StaticResource Serv}}" Background="{Binding BackgroundTestConnection, Source={StaticResource Serv}}"  Grid.Row="20" Grid.Column="0" Grid.ColumnSpan="3">Test Connection</Button>
+
+        <Button Margin="3" Grid.Row="20" Grid.Column="6" Grid.ColumnSpan="2" Command="{Binding okconnection, Source={StaticResource Serv}}">OK</Button>
+        <Button Click="Button_Click" Margin="3,3,3,0" Grid.Row="20" Grid.Column="8" Grid.ColumnSpan="2" Height="19" VerticalAlignment="Top">Cancel</Button>
+    </Grid>
+</Window>
